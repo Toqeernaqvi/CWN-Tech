@@ -4,6 +4,7 @@ import Footer from "@components/footer/Footer";
 import Whatsapp from "../../components/Whatsapp_Logo/Whatsapp";
 import Header from "../../components/header/Header";
 import Seo from "@components/seo/Seo";
+import Stats from "@components/stats/Stats";
 
 import courseHeaderImg from "../../assets/images/courses/sir.jpeg";
 import htmlThumbnail from "../../assets/images/courses/html.jpeg";
@@ -30,27 +31,7 @@ export function Courses() {
         imgAlt="Course Header Image of Professor Toqeer Abbas"
       />
 
-      <section className="section bg-main-shade mb-32">
-        <div className="flex flex-col gap-3 items-center py-14">
-          <h2 className="mb-5 text-white text-center text-2xl font-semibold font-poppins">
-            Pakistan&apos;s Most Loved Coding Community ❤️
-          </h2>
-          <div className="grid xm:grid-cols-3 gap-12 xm:gap-24 text-center text-light leading-7 mb-4">
-            <div>
-              <h3 className="text-2xl">10,000+</h3>
-              <p className="text-xl font-semibold">Happy Learners</p>
-            </div>
-            <div>
-              <h3 className="text-2xl">10000+</h3>
-              <p className="text-xl font-semibold">Monthly Views</p>
-            </div>
-            <div>
-              <h3 className="text-2xl">1000+</h3>
-              <p className="text-xl font-semibold">Monthly Subscribers</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Stats />
       <section className="section mb-32 bg-gray-50 py-16 rounded-xl">
         <h2 className="h2 text-center mb-12 center-orange-line">
           Level up your web development skills with CodeWithNaqvi on YouTube
