@@ -6,6 +6,7 @@ import {
   Services,
   Solutions,
   Courses,
+  Projects,
   Portfolio,
   Company,
   Blogs,
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/solutions" element={<Solutions />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/company" element={<Company />} />
