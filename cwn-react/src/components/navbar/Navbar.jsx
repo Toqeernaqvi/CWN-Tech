@@ -51,6 +51,7 @@ export default function Navbar() {
     { text: "Solutions", path: "/solutions" },
     { text: "FAQ", path: "/#faq" },
     { text: "Courses", path: "/courses" },
+    { text: "Projects", path: "/projects" },
     // { text: "Portfolio", path: "/portfolio" },
     // { text: "Blogs", path: "/blogs" },
     // { text: "Company", path: "/company" },
