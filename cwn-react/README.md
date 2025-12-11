@@ -4,10 +4,8 @@ This project provides a minimal setup to get React working with Vite, featuring 
 
 ## Plugins
 
-You can choose between two official plugins:
-
-- **[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)**: Uses [Babel](https://babeljs.io/) for Fast Refresh.
-- **[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)**: Uses [SWC](https://swc.rs/) for Fast Refresh.
+- **[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)**: Uses Babel for Fast Refresh.
+- **[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)**: Uses SWC for Fast Refresh.
 
 ## Requirements
 
@@ -18,3 +16,16 @@ You can choose between two official plugins:
 1. Install dependencies:
    ```bash
    npm install
+   ```
+2. Start dev server:
+   ```bash
+   npm run dev
+   ```
+
+## Blogs & CMS
+- Frontend routes:
+  - `/blogs` – listing with search, categories, featured, pagination.
+  - `/blogs/:slug` – article detail with SEO tags from the API.
+  - `/blogs/admin` – editor with rich text, cover upload, SEO fields.
+- Configure `VITE_BLOG_API_URL` in `.env` to point to the PHP API (default `http://localhost:8000`).
+- Backend (PHP 7.4) scaffold lives in `backend/` with routes for posts, categories, uploads, and bearer auth. Copy `.env.example` → `.env`, set DB + `ADMIN_TOKEN`, import `schema.sql`, then run `php -S localhost:8000 -t public` from `backend/`.

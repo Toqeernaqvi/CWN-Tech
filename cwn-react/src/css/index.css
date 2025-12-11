@@ -126,6 +126,31 @@ body {
   padding: 0 264px;
 }
 
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  color: #242323;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-content p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content a {
+  color: #125F60;
+  text-decoration: underline;
+}
+
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-slide,

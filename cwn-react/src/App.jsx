@@ -9,6 +9,8 @@ import {
   Portfolio,
   Company,
   Blogs,
+  BlogPost,
+  BlogAdmin,
   PrivacyPolicy,
 } from "@pages";
 import Seo from "@components/seo/Seo";
@@ -31,6 +33,8 @@ export default function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/admin" element={<BlogAdmin />} />
+        <Route path="/blogs/:slug" element={<BlogPost />} />
         <Route path="/company" element={<Company />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="*" element={<Navigate to={"./"} replace />} />
