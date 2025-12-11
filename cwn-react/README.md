@@ -1,31 +1,29 @@
-# React + Vite
+# CWN React + PHP API
 
-This project provides a minimal setup to get React working with Vite, featuring Hot Module Replacement (HMR) and some ESLint rules.
-
-## Plugins
-
-- **[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)**: Uses Babel for Fast Refresh.
-- **[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)**: Uses SWC for Fast Refresh.
+Instructions for running the React frontend and the PHP blog API locally.
 
 ## Requirements
+- Node.js v20.11.0+
+- PHP 7.4+
 
-- **Node.js**: v20.11.0 or higher
+## Setup & Run (frontend)
+```bash
+npm install
+npm run dev
+```
+Configure `VITE_BLOG_API_URL` in a `.env` file at the repo root (example: `http://localhost:8000`).
 
-## Getting Started
-
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start dev server:
-   ```bash
-   npm run dev
-   ```
+## Setup & Run (backend API)
+```bash
+cd backend
+cp .env.example .env   # set DB credentials and ADMIN_TOKEN
+php -S localhost:8000 -t public
+```
+Import `schema.sql` into your database before starting.
 
 ## Blogs & CMS
 - Frontend routes:
-  - `/blogs` – listing with search, categories, featured, pagination.
-  - `/blogs/:slug` – article detail with SEO tags from the API.
-  - `/blogs/admin` – editor with rich text, cover upload, SEO fields.
-- Configure `VITE_BLOG_API_URL` in `.env` to point to the PHP API (default `http://localhost:8000`).
-- Backend (PHP 7.4) scaffold lives in `backend/` with routes for posts, categories, uploads, and bearer auth. Copy `.env.example` → `.env`, set DB + `ADMIN_TOKEN`, import `schema.sql`, then run `php -S localhost:8000 -t public` from `backend/`.
+  - `/blogs` — listing with search, categories, featured, pagination.
+  - `/blogs/:slug` — article detail with SEO tags from the API.
+  - `/blogs/admin` — editor with rich text, cover upload, SEO fields, delete/edit existing posts.
+- Backend routes: posts, categories, uploads, all protected by bearer token for writes/uploads (`ADMIN_TOKEN` in backend `.env`).

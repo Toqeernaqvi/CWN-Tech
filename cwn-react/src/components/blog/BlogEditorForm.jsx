@@ -234,6 +234,7 @@ export default function BlogEditorForm({
               value={form.body}
               onChange={(val) => updateField("body", val)}
               placeholder="Write your article..."
+              adminToken={adminToken}
             />
           </div>
 
