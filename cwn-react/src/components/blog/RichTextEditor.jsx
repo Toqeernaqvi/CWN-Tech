@@ -1,11 +1,9 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { uploadImage } from "../../lib/blogApi";
 
-export default function RichTextEditor({ value, onChange, placeholder, adminToken }) {
+export default function RichTextEditor({ value, onChange, placeholder }) {
   const quillRef = useRef(null);
-  const [uploading, setUploading] = useState(false);
 
   const insertImage = useCallback((url) => {
     const editor = quillRef.current?.getEditor();
@@ -17,36 +15,17 @@ export default function RichTextEditor({ value, onChange, placeholder, adminToke
   }, []);
 
   const handleImage = useCallback(() => {
-    const editor = quillRef.current?.getEditor();
-    if (!editor) return;
+    const url = window.prompt("Paste an image URL");
+    if (!url) return;
 
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.onchange = async () => {
-      const file = input.files?.[0];
-      if (!file) return;
-
-      // If no admin token, fallback to URL prompt
-      if (!adminToken) {
-        const url = window.prompt("Enter image URL");
-        insertImage(url);
-        return;
-      }
-
-      try {
-        setUploading(true);
-        const res = await uploadImage(file, adminToken);
-        insertImage(res.url || res.path);
-      } catch (err) {
-        const message = err?.message || "Image upload failed";
-        window.alert(message);
-      } finally {
-        setUploading(false);
-      }
-    };
-    input.click();
-  }, [adminToken, insertImage]);
+    try {
+      // Basic validation to avoid inserting invalid strings
+      const parsed = new URL(url);
+      insertImage(parsed.toString());
+    } catch (err) {
+      window.alert("Please enter a valid image URL (https://...)");
+    }
+  }, [insertImage]);
 
   const modules = useMemo(
     () => ({
@@ -94,11 +73,6 @@ export default function RichTextEditor({ value, onChange, placeholder, adminToke
         placeholder={placeholder || "Write something..."}
         className="quill-container"
       />
-      {uploading && (
-        <div className="px-4 py-2 text-xs text-sub-para bg-main-mint/30 border-t border-light-gray">
-          Uploading image...
-        </div>
-      )}
     </div>
   );
 }

@@ -47,20 +47,3 @@ export async function updatePost(id, body, token) {
 export async function deletePost(id, token) {
   return request(`/posts/${id}`, { method: "DELETE", token });
 }
-
-export async function uploadImage(file, token) {
-  const form = new FormData();
-  form.append("image", file);
-  const res = await fetch(`${API_BASE}/uploads`, {
-    method: "POST",
-    headers: {
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: form,
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    throw new Error(data?.error || "Upload failed");
-  }
-  return data;
-}

@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  createPost,
-  updatePost,
-  uploadImage,
-} from "../../lib/blogApi";
+import { createPost, updatePost } from "../../lib/blogApi";
 import RichTextEditor from "./RichTextEditor";
 
 const initialForm = {
@@ -63,28 +59,17 @@ export default function BlogEditorForm({
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  const autoSlug = () => {
-    if (!form.title) return;
-    const slug = form.title
+  const toSlug = (value) =>
+    value
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "")
       .trim()
       .replace(/\s+/g, "-");
-    updateField("slug", slug);
-  };
 
-  const handleUpload = async (file) => {
-    if (!file) return;
-    try {
-      setSaving(true);
-      const res = await uploadImage(file, adminToken);
-      updateField("cover_url", res.url);
-      setMessage("Image uploaded");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSaving(false);
-    }
+  const autoSlug = () => {
+    if (!form.title) return;
+    const slug = toSlug(form.title);
+    updateField("slug", slug);
   };
 
   const handleSubmit = async (e) => {
@@ -173,29 +158,22 @@ export default function BlogEditorForm({
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-sm font-semibold text-heading">Cover Image</label>
-              <div className="flex gap-3">
-                <input
-                  type="text"
-                  value={form.cover_url}
-                  onChange={(e) => updateField("cover_url", e.target.value)}
-                  className="flex-1 rounded-xl border border-light-gray px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
-                  placeholder="https://example.com/cover.jpg"
-                />
-                <label className="inline-flex items-center px-4 py-2 rounded-xl border border-light-gray bg-main-mint text-main-shade cursor-pointer hover:border-main">
-                  Upload
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => handleUpload(e.target.files?.[0])}
-                  />
-                </label>
-              </div>
+              <input
+                type="url"
+                value={form.cover_url}
+                onChange={(e) => updateField("cover_url", e.target.value)}
+                className="rounded-xl border border-light-gray px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
+                placeholder="Paste an image URL (https://...)"
+              />
+              <p className="text-xs text-sub-para">
+                We now store image links directly -- paste a full URL to any hosted image to preview and save.
+              </p>
               {form.cover_url && (
                 <img
                   src={form.cover_url}
                   alt="cover preview"
                   className="h-28 w-full object-cover rounded-xl border border-light-gray"
+                  loading="lazy"
                 />
               )}
             </div>
@@ -234,7 +212,6 @@ export default function BlogEditorForm({
               value={form.body}
               onChange={(val) => updateField("body", val)}
               placeholder="Write your article..."
-              adminToken={adminToken}
             />
           </div>
 
