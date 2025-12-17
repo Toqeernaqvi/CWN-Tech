@@ -3,7 +3,7 @@
 Lightweight PHP API for blog posts, categories, uploads, and SEO fields.
 
 ### Setup
-1) Copy `.env.example` to `.env` and fill DB + `ADMIN_TOKEN`.
+1) Copy `.env.example` to `.env` and fill DB + `ADMIN_TOKEN` + `ADMIN_EMAIL` + `ADMIN_PASSWORD`.
 2) Import `schema.sql` into your MySQL database.
 3) Serve the API (examples):
 ```bash
@@ -20,6 +20,8 @@ php -S localhost:8000 -t public
 - `POST /uploads` – upload image (field: `image`) (auth). Returns `{ url }`.
 - `GET /categories` – list categories.
 - `POST /categories`, `PATCH /categories/{id}`, `DELETE /categories/{id}` – manage categories (auth).
+- `POST /auth/login` – exchange `email` + `password` for bearer token (`ADMIN_TOKEN`).
+- `GET /auth/me` – validate token and return admin email.
 
 ### Auth
-Send header: `Authorization: Bearer <ADMIN_TOKEN>`.
+Send header: `Authorization: Bearer <ADMIN_TOKEN>`. You can fetch a token via `/auth/login`.

@@ -36,6 +36,17 @@ export async function fetchCategories() {
   return request("/categories");
 }
 
+export async function loginAdmin(credentials) {
+  return request("/auth/login", {
+    method: "POST",
+    body: JSON.stringify(credentials),
+  });
+}
+
+export async function fetchCurrentAdmin(token) {
+  return request("/auth/me", { token });
+}
+
 export async function createPost(body, token) {
   return request("/posts", { method: "POST", body: JSON.stringify(body), token });
 }

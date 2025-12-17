@@ -6,6 +6,7 @@ require __DIR__ . '/../bootstrap.php';
 
 use App\Controllers\CategoryController;
 use App\Controllers\PostController;
+use App\Controllers\AuthController;
 use App\Http\Request;
 use App\Http\Response;
 use App\Http\Router;
@@ -21,6 +22,15 @@ if (php_sapi_name() === 'cli-server') {
 $router = new Router();
 $postController = new PostController();
 $categoryController = new CategoryController();
+$authController = new AuthController();
+
+$router->add('POST', '/auth/login', function (Request $request) use ($authController): void {
+    $authController->login($request);
+});
+
+$router->add('GET', '/auth/me', function (Request $request) use ($authController): void {
+    $authController->me($request);
+});
 
 $router->add('GET', '/posts', function (Request $request) use ($postController): void {
     $postController->index($request);
