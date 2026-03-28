@@ -12,6 +12,7 @@ import {
   BlogPost,
   BlogAdmin,
   PrivacyPolicy,
+  Bootcamp,
 } from "@pages";
 import Seo from "@components/seo/Seo";
 
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/blogs/:slug" element={<BlogPost />} />
         <Route path="/company" element={<Company />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/bootcamp" element={<Bootcamp />} />
         <Route path="*" element={<Navigate to={"./"} replace />} />
       </Routes>
     </>
