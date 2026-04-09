@@ -2,8 +2,8 @@ import Button from "@components/button/button";
 
 export default function BookCall() {
   return (
-    <section className="section bg-main-shade mb-32">
-      <div className="flex flex-col gap-3 items-center py-14">
+    <section className="section mb-24">
+      <div className="flex flex-col items-center gap-4 rounded-[36px] bg-main-shade px-6 py-14 text-center sm:px-10">
         <h2 className="text-3xl md:text-4xl lg:text-5xl text-center text-white font-poppins font-semibold tracking-tight leading-tight max-w-[950px]">
           Ready to Kickstart Your Project?
         </h2>
@@ -14,7 +14,7 @@ export default function BookCall() {
         </p>
         <Button
           text="Book Free Consultation"
-          styles="bg-transparent text-black mb-5"
+          styles="mb-4 border border-white/10 bg-main text-white hover:bg-main-tint focus:bg-main-tint"
           href={"https://calendly.com/malikhaziq153/30min"}
         />
         <p className="text-light text-center">
