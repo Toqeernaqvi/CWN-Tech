@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   CheckCircle2, 
@@ -25,8 +25,8 @@ import Footer from "@components/footer/Footer";
 import Button from "@components/button/button";
 import AnimatedSection from "@components/AnimatedSection/AnimatedSection";
 import Seo from "@components/seo/Seo";
-import toqeer from "@images/about/toqeer.jpeg";
-import sir from "@images/courses/sir.jpeg";
+import Whatsapp from "@components/Whatsapp_Logo/Whatsapp";
+import shortLogo from "@icons/short-logo.svg";
 
 const Bootcamp = () => {
   const [formData, setFormData] = useState({
@@ -37,14 +37,8 @@ const Bootcamp = () => {
     goals: ''
   });
   const [enrolled, setEnrolled] = useState(false);
-  const [counter, setCounter] = useState(137);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCounter(prev => prev + Math.floor(Math.random() * 2));
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+  const [openCurriculum, setOpenCurriculum] = useState(0);
+  const [openFaq, setOpenFaq] = useState(0);
 
   const handleEnroll = (e) => {
     e.preventDefault();
@@ -119,24 +113,79 @@ const Bootcamp = () => {
     },
   ];
 
+  const curriculumTracks = [
+    {
+      title: 'Frontend',
+      topics: 'HTML, CSS, JavaScript, React',
+      details: 'Build strong frontend foundations by learning page structure, styling, interactivity, and component-based development.',
+      icon: <Code2 className="w-8 h-8 text-main" />
+    },
+    {
+      title: 'Backend',
+      topics: 'PHP, Laravel',
+      details: 'Learn how to create dynamic applications, handle business logic, work with servers, and build scalable backend systems.',
+      icon: <Database className="w-8 h-8 text-main" />
+    },
+    {
+      title: 'Projects',
+      topics: 'Hands-on portfolio projects and real-world practice',
+      details: 'Apply everything through practical projects that strengthen your portfolio and prepare you for real client or job work.',
+      icon: <Rocket className="w-8 h-8 text-main" />
+    }
+  ];
+
   const testimonials = [
     {
-      name: 'Sarah Jenkins',
+      name: 'Ayesha Khan',
       role: 'Frontend Developer @ TechFlow',
       content: 'This bootcamp completely changed my career path. The AI integration module was the game-changer that helped me land my current role.',
-      avatar: 'SJ'
+      avatar: 'AK'
     },
     {
-      name: 'Michael Chen',
+      name: 'Hamza Ali',
       role: 'Freelance Web Developer',
       content: 'Building real SaaS projects gave me the confidence to start my own agency. The curriculum is incredibly practical and up-to-date.',
-      avatar: 'MC'
+      avatar: 'HA'
     },
     {
-      name: 'Elena Rodriguez',
+      name: 'Fatima Ahmed',
       role: 'Junior Fullstack Engineer',
       content: 'The mentors are amazing. They don\'t just teach code; they teach you how to think like an engineer and solve complex problems.',
-      avatar: 'ER'
+      avatar: 'FA'
+    }
+  ];
+
+  const faqs = [
+    {
+      question: 'Is this bootcamp beginner-friendly?',
+      answer: 'Yes. The program starts from HTML, CSS, and JavaScript fundamentals before moving into React, backend development, and AI integration, so complete beginners can follow along.'
+    },
+    {
+      question: 'How are the classes delivered?',
+      answer: 'You will learn through guided modules, hands-on assignments, project building, and mentorship support designed to help you apply each concept in practical work.'
+    },
+    {
+      question: 'What will I build during the bootcamp?',
+      answer: 'You will create multiple portfolio-ready web applications, including fullstack projects and AI-powered products that demonstrate real-world frontend, backend, and integration skills.'
+    },
+    {
+      question: 'Will I get help with jobs or freelancing?',
+      answer: 'Yes. The bootcamp includes career readiness support such as portfolio polishing, interview preparation, and freelancing guidance so you can turn your skills into opportunities.'
+    },
+    {
+      question: 'Do I get lifetime access after enrolling?',
+      answer: 'Yes. Students on the full course plan get lifetime access to the training material and future updates so you can revisit lessons anytime.'
+    }
+  ];
+
+  const certificationPoints = [
+    {
+      title: 'Start today',
+      description: 'You are just months away from building the skills needed to start your tech career with confidence.'
+    },
+    {
+      title: 'Believe in yourself',
+      description: 'Coding becomes easier with the right roadmap, practical support, and consistent hands-on learning throughout the bootcamp.'
     }
   ];
 
@@ -209,24 +258,6 @@ const Bootcamp = () => {
             </button>
           </div>
 
-          <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-sub-para font-semibold">
-            <div className="flex -space-x-4">
-              {[toqeer, sir].map((img, i) => (
-                <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-light-gray overflow-hidden shadow-md">
-                  <img src={img} alt="student" className="w-full h-full object-cover" />
-                </div>
-              ))}
-              <div className="w-12 h-12 rounded-full border-2 border-white bg-main text-white flex items-center justify-center text-xs font-bold shadow-md">
-                +135
-              </div>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="flex justify-center sm:justify-start gap-0.5 text-tertiary mb-1">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-              </div>
-              <p className="text-sm">Join {counter} students building the future</p>
-            </div>
-          </div>
         </div>
       </AnimatedSection>
 
@@ -291,6 +322,164 @@ const Bootcamp = () => {
         </div>
       </section>
 
+      <section className="py-20 md:py-28 section bg-main-mint/20">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-heading center-orange-line relative">
+              Know Your <span className="text-main">Curriculum</span>
+            </h2>
+            <p className="text-sub-para max-w-2xl mx-auto mt-12 text-sm md:text-base leading-relaxed">
+              A simple overview of the core skills you will learn during the bootcamp.
+            </p>
+          </div>
+
+          <div className="space-y-5 max-w-4xl mx-auto">
+            {curriculumTracks.map((track, idx) => {
+              const isOpen = openCurriculum === idx;
+
+              return (
+                <motion.div
+                  key={track.title}
+                  {...fadeInUp}
+                  transition={{ delay: idx * 0.08 }}
+                  className="rounded-3xl border border-main/10 bg-white shadow-card overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenCurriculum(isOpen ? -1 : idx)}
+                    className="w-full flex items-center justify-between gap-4 px-6 md:px-8 py-6 text-left"
+                    aria-expanded={isOpen}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-2xl bg-main-mint flex items-center justify-center shrink-0">
+                        {track.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-lg md:text-2xl font-bold text-heading">
+                          {track.title}
+                        </h3>
+                        <p className="text-sub-para text-sm md:text-base">
+                          {track.topics}
+                        </p>
+                      </div>
+                    </div>
+                    <span className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-main-mint text-main text-2xl font-medium transition-transform duration-300 ${isOpen ? 'rotate-45' : 'rotate-0'}`}>
+                      +
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 md:px-8 pb-7 pt-1 text-sm md:text-base text-para leading-relaxed">
+                          {track.details}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 md:py-32 section bg-white mt-5">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-heading mb-10 text-center lg:text-left">
+                Get <span className="text-main">Certified.</span>
+              </h2>
+
+              <div className="space-y-8 max-w-2xl">
+                {certificationPoints.map((point, idx) => (
+                  <motion.div
+                    key={point.title}
+                    {...fadeInUp}
+                    transition={{ delay: idx * 0.1 }}
+                    className="flex gap-4"
+                  >
+                    <div className="w-12 h-12 rounded-2xl bg-main-mint flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-6 h-6 text-main" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-heading mb-2">{point.title}</h3>
+                      <p className="text-para text-sm md:text-base leading-relaxed">{point.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => document.getElementById('contact').scrollIntoView({behavior: 'smooth'})}
+                className="mt-10 bg-tertiary px-8 py-4 rounded-xl text-white font-bold text-lg hover:opacity-90 active:scale-95 transition-all inline-flex items-center gap-2"
+              >
+                Enroll Now <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            <motion.div
+              {...fadeInUp}
+              className="relative"
+            >
+              <p className="text-heading font-bold text-lg md:text-xl text-center mb-6 uppercase tracking-wide">
+                Start Your Placement Journey Today.
+              </p>
+
+              <div className="relative bg-white border border-main/10 rounded-[32px] shadow-card p-8 md:p-10 overflow-hidden">
+                <div className="absolute bottom-8 right-6 w-28 h-28 rounded-full border border-main/20 opacity-40" />
+
+                <div className="relative z-10 border-2 border-[#d8c28d] rounded-[24px] px-6 py-10 md:px-10 md:py-12 text-center bg-gradient-to-br from-white to-[#fffaf0]">
+                  <div className="flex justify-end mb-6">
+                    <img
+                      src={shortLogo}
+                      alt="CWN logo"
+                      className="h-10 md:h-12 w-auto object-contain"
+                    />
+                  </div>
+                  <p className="text-xs md:text-sm font-bold tracking-[0.25em] text-main uppercase mb-4">
+                    Certificate
+                  </p>
+                  <h3 className="text-3xl md:text-5xl font-serif text-heading mb-3">
+                    Of Completion
+                  </h3>
+                  <p className="text-sub-para text-sm md:text-base mb-8">
+                    Awarded for successfully completing the AI Web Development Bootcamp.
+                  </p>
+
+                  <div className="w-full h-px bg-[#d8c28d] mb-6" />
+
+                  <p className="text-2xl md:text-4xl font-semibold text-main mb-3">
+                    Your Name Here
+                  </p>
+                  <p className="text-para text-sm md:text-base mb-8">
+                    Mastering frontend, backend, and project development with practical industry-focused training.
+                  </p>
+
+                  <div className="flex items-center justify-between gap-4 pt-4">
+                    <div className="text-left">
+                      <div className="w-24 h-px bg-heading/30 mb-2" />
+                      <p className="text-xs md:text-sm text-para">Instructor Signature</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="w-24 h-px bg-heading/30 mb-2 ml-auto" />
+                      <p className="text-xs md:text-sm text-para">Code With Naqvi</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-20 md:py-32 section bg-main-mint/20">
         <div className="container mx-auto">
@@ -324,6 +513,65 @@ const Bootcamp = () => {
         </div>
       </section>
 
+      {/* FAQs */}
+      <section className="py-20 md:py-32 section bg-white" id="faqs">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-heading center-orange-line relative">
+              Frequently Asked <span className="text-main">Questions</span>
+            </h2>
+            <p className="text-sub-para max-w-2xl mx-auto mt-12 text-sm md:text-base leading-relaxed">
+              Everything you should know before joining the bootcamp.
+            </p>
+          </div>
+
+          <div className="space-y-5">
+            {faqs.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+
+              return (
+                <motion.div
+                  key={faq.question}
+                  {...fadeInUp}
+                  transition={{ delay: idx * 0.08 }}
+                  className="rounded-3xl border border-main/10 bg-main-mint/40 shadow-card overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? -1 : idx)}
+                    className="w-full flex items-center justify-between gap-4 px-6 md:px-8 py-6 text-left"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-base md:text-xl font-bold text-heading">
+                      {faq.question}
+                    </span>
+                    <span className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-white text-main text-2xl font-medium transition-transform duration-300 ${isOpen ? 'rotate-45' : 'rotate-0'}`}>
+                      +
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 md:px-8 pb-7 pt-1 text-sm md:text-base text-para leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section className="py-20 md:py-32 section" id="pricing">
         <div className="container mx-auto">
@@ -331,25 +579,28 @@ const Bootcamp = () => {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-heading center-orange-line relative">
               Invest in Your <span className="text-main">Future</span>
             </h2>
+            <p className="text-sub-para max-w-2xl mx-auto mt-12 text-sm md:text-base">
+              Total course fee is Rs. 50,000. The regular monthly fee is Rs. 10,000, but first batch students can join at a discounted monthly fee of Rs. 5,000 or unlock full access for Rs. 30,000.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-16">
             {/* Free Tier */}
             <motion.div {...fadeInUp} className="bg-main-mint p-8 md:p-10 rounded-3xl border border-main/10 shadow-sm cursor-pointer hover:shadow-card transition-shadow">
-              <h3 className="text-xl font-bold mb-2 text-heading">Kickstart</h3>
-              <p className="text-sub-para text-sm mb-6">Perfect for beginners exploring the field.</p>
-              <div className="text-4xl font-bold mb-8 text-heading">Free <span className="text-lg text-sub-para font-normal">/ Preview</span></div>
+              <h3 className="text-xl font-bold mb-2 text-heading">Monthly Plan</h3>
+              <p className="text-sub-para text-sm mb-6">Regular monthly fee is Rs. 10,000, with a first batch discounted fee of Rs. 5,000 per month.</p>
+              <div className="text-4xl font-bold mb-8 text-heading">Rs. 5,000 <span className="text-lg text-sub-para font-normal">/ month</span></div>
               <ul className="space-y-4 mb-10">
-                <li className="flex items-center gap-3 text-sm text-para font-medium"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> First 3 modules preview</li>
-                <li className="flex items-center gap-3 text-sm text-para font-medium"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Community Access</li>
-                <li className="flex items-center gap-3 text-sm text-sub-para line-through opacity-50"><CheckCircle2 className="w-5 h-5 shrink-0" /> Personalized Mentorship</li>
-                <li className="flex items-center gap-3 text-sm text-sub-para line-through opacity-50"><CheckCircle2 className="w-5 h-5 shrink-0" /> Certification of Completion</li>
+                <li className="flex items-center gap-3 text-sm text-para font-medium"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Regular fee: Rs. 10,000 per month</li>
+                <li className="flex items-center gap-3 text-sm text-para font-medium"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> First batch discounted fee: Rs. 5,000 per month</li>
+                <li className="flex items-center gap-3 text-sm text-para font-medium"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Learn with full curriculum access by monthly payment</li>
+                <li className="flex items-center gap-3 text-sm text-para font-medium"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Ideal for budget-friendly enrollment</li>
               </ul>
               <button 
                 onClick={() => document.getElementById('contact').scrollIntoView({behavior: 'smooth'})} 
                 className="w-full py-4 rounded-xl border-2 border-main text-main hover:bg-main hover:text-white transition-all font-bold"
               >
-                Start Free Trial
+                Choose Monthly Plan
               </button>
             </motion.div>
 
@@ -357,14 +608,14 @@ const Bootcamp = () => {
             <motion.div {...fadeInUp} className="bg-white p-8 md:p-10 rounded-3xl border-2 border-main relative overflow-hidden shadow-card cursor-pointer group">
               <div className="absolute top-6 right-6 bg-tertiary text-white text-[10px] font-black px-2 py-1 rounded transform rotate-12 z-20">MOST POPULAR</div>
               <h3 className="text-xl font-bold mb-2 text-main">Mastery Pass</h3>
-              <p className="text-sub-para text-sm mb-6">Full journey from zero to job-ready.</p>
-              <div className="text-4xl font-bold mb-8 text-heading">$100 <span className="text-lg text-sub-para font-normal">/ Full Course</span></div>
+              <p className="text-sub-para text-sm mb-6">Best value for students who want complete access at a reduced total price.</p>
+              <div className="text-4xl font-bold mb-8 text-heading">Rs. 30,000 <span className="text-lg text-sub-para font-normal">/ Full Access</span></div>
               <ul className="space-y-4 mb-10">
-                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> All 6 Modules & Assignments</li>
-                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Priority Mentorship Support</li>
-                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Personalized Portfolio Review</li>
-                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Final AI Project Guidance</li>
-                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Lifetime Access & Updates</li>
+                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Full course value: Rs. 50,000</li>
+                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Get full access for only Rs. 30,000</li>
+                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Save Rs. 20,000 on the complete bootcamp</li>
+                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Includes all 6 modules, assignments, and mentorship</li>
+                <li className="flex items-center gap-3 text-sm text-para font-bold"><CheckCircle2 className="w-5 h-5 text-main shrink-0" /> Lifetime access & future updates</li>
               </ul>
               <button 
                 onClick={() => document.getElementById('contact').scrollIntoView({behavior: 'smooth'})} 
@@ -487,6 +738,7 @@ const Bootcamp = () => {
         </div>
       </section>
 
+      <Whatsapp />
       <Footer />
     </main>
   );
