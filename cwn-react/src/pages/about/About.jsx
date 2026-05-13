@@ -6,7 +6,7 @@ import Services from "@components/services/Services";
 import Button from "@components/button/button";
 
 import ourStory from "@images/about/our-story.svg";
-import toqeerPhoto from "@images/about/pp.png";
+import toqeerPhoto from "@images/about/toqeer.jpeg";
 import Whatsapp from "../../components/Whatsapp_Logo/Whatsapp";
 import Seo from "@components/seo/Seo";
 import AnimatedSection from "@components/AnimatedSection/AnimatedSection";
